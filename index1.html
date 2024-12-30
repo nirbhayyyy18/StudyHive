@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Study Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Online Study Planner</h1>
+        </header>
+
+        <main>
+            <section class="planner">
+                <div class="planner-input">
+                    <h2>Create Your Plan</h2>
+                    <label for="activity">Activity:</label>
+                    <input type="text" id="activity" placeholder="Enter your activity">
+
+                    <label for="start-time">Start Time:</label>
+                    <input type="time" id="start-time">
+
+                    <label for="end-time">End Time:</label>
+                    <input type="time" id="end-time">
+
+                    <button id="add-btn">Add to Planner</button>
+                </div>
+
+                <div class="planner-display">
+                    <h2>Your Plan</h2>
+                    <ul id="plan-list"></ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>@Nirbhay 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        const activityInput = document.getElementById('activity');
+        const startTimeInput = document.getElementById('start-time');
+        const endTimeInput = document.getElementById('end-time');
+        const addButton = document.getElementById('add-btn');
+        const planList = document.getElementById('plan-list');
+
+        addButton.addEventListener('click', () => {
+            const activity = activityInput.value;
+            const startTime = startTimeInput.value;
+            const endTime = endTimeInput.value;
+
+            if (activity && startTime && endTime) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<span>${activity}</span> | <span>${startTime} - ${endTime}</span> <button class='delete-btn'>Delete</button>`;
+                planList.appendChild(listItem);
+
+                listItem.querySelector('.delete-btn').addEventListener('click', () => {
+                    listItem.remove();
+                });
+
+                activityInput.value = '';
+                startTimeInput.value = '';
+                endTimeInput.value = '';
+            } else {
+                alert('Please fill out all fields!');
+            }
+        });
+    </script>
+</body>
+</html>
